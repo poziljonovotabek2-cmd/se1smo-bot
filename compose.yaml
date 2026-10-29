@@ -1,0 +1,15 @@
+services:
+  quakewatch:
+    build: .
+    container_name: quakewatch_bot
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "8000:8000"
+    networks:
+      - pgadmin_db
+
+networks:
+  pgadmin_db:
+    external: true
+    name: docker_pg_network
