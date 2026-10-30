@@ -6,7 +6,7 @@ This is an information tool, not an official warning service, seismic instrument
 
 ## Run with Docker
 
-You need Docker Compose and a PostgreSQL server reachable from the Docker network `docker_pg_network`. In the existing setup, PostgreSQL is the `postgres_db` container; the app uses database `quakebot` and role `quakewatch_app`. pgAdmin is optional and is not needed to run the bot. The database and role must already exist; the app creates its tables when it starts.
+You need Docker Compose and a PostgreSQL server reachable from the Docker network `docker_pg_network`. In the existing setup, PostgreSQL is the `postgres_db` container; the app uses database `quakebot` and role `quakewatch_app`. pgAdmin is optional and is not needed to run the bot. The database and role must already exist; the app creates its tables when it starts. In the current setup, PostgreSQL is published on host port 5433 to avoid a collision; containers on `docker_pg_network` still connect to `postgres_db:5432`.
 
 1. Create a local environment file and edit it:
 
@@ -26,7 +26,7 @@ You need Docker Compose and a PostgreSQL server reachable from the Docker networ
 3. Check the backend health endpoint:
 
    ```sh
-   curl http://localhost:8000/health
+   curl http://localhost:8001/health
    ```
 
    It should return `{"status":"ok"}`. This confirms the FastAPI process is responding; Telegram interaction below checks the bot itself.
